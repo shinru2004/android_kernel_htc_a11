@@ -157,7 +157,6 @@ static struct mux_div_clk a7ssmux = {
 
 static struct clk_lookup clock_tbl_a7[] = {
 	CLK_LOOKUP("cpu0_clk",	a7ssmux.c, "0.qcom,msm-cpufreq"),
-	CLK_LOOKUP("cpu0_clk",	a7ssmux.c, "fe805664.qcom,pm-8x60"),
 };
 
 static int of_get_fmax_vdd_class(struct platform_device *pdev, struct clk *c,
@@ -245,7 +244,7 @@ static void get_speed_bin(struct platform_device *pdev, int *bin, int *version)
 	*version = (pte_efuse >> 4) & 0x3;
 
 	if (redundant_sel == 1)
-		*bin = (pte_efuse >> 27) & 0x7;
+		*bin = (pte_efuse >> 24) & 0x7;
 
 	if (!valid) {
 		dev_info(&pdev->dev, "Speed bin not set. Defaulting to 0!\n");
